@@ -1,24 +1,23 @@
 import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+const messageBox = document.querySelector<HTMLDivElement>('#message-box')!
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const urlParams = new URLSearchParams(window.location.search)
+const toParam = urlParams.get('to')
+
+if (!toParam || toParam.trim() === '') {
+  messageBox.innerHTML =
+    '<span class="error-label">Error:</span><br>URL parameter "to" is not specified.'
+} else {
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
+
+  if (isIOS) {
+    const vlcUrl = `vlc-x-callback://x-callback-url/download?url=${encodeURIComponent(toParam)}`
+    messageBox.innerHTML =
+      'Opening VLC app...<br><small>If the page does not switch, please check for a permission dialog.</small>'
+    window.location.href = vlcUrl
+  } else {
+    messageBox.innerHTML = 'Redirecting...'
+    window.location.href = toParam
+  }
+}
