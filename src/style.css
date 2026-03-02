@@ -1,3 +1,11 @@
+:root {
+  --color-bg: #f9f9f9;
+  --color-text: #333;
+  --color-card-bg: #fff;
+  --color-muted: #666;
+  --color-error: #e53e3e;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   display: flex;
@@ -5,8 +13,8 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: var(--color-bg);
+  color: var(--color-text);
   text-align: center;
   padding: 20px;
   box-sizing: border-box;
@@ -14,7 +22,7 @@ body {
 
 #message-box {
   padding: 24px;
-  background: #ffffff;
+  background: var(--color-card-bg);
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   max-width: 400px;
@@ -23,12 +31,12 @@ body {
 }
 
 #message-box small {
-  color: #666;
+  color: var(--color-muted);
   margin-top: 10px;
   display: block;
 }
 
 .error-label {
-  color: #e53e3e;
+  color: var(--color-error);
   font-weight: bold;
 }
